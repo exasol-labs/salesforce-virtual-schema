@@ -1,0 +1,9 @@
+# for building templated sql
+jinja2
+
+# for the actual code
+requests
+
+# for tests
+pytest
+exasol-udf-mock-python
