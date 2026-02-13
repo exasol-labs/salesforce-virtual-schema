@@ -28,7 +28,7 @@ create or replace python3 scalar script SF_SELECT (
 /
 ```
 
-> [!INFO]
+> [!TIP]
 > 
 > All you need for the virtual schema are the `SF_ADAPTER.sql` and `SF_SELECT.sql` files. The others are
 > for exploration and debugging.
@@ -91,7 +91,7 @@ SET OBJECT_WHITELIST = '(Account|Asset.*|Calendar|Case.*|Contact)'
 > Be prepared to wait a few minutes at this step when you pull in 
 > has many object types here...
 
-> [!INFO]
+> [!TIP]
 > 
 > The `SF_LIST` script (if deployed) can be used to get a list of valid/accessible salesforce objects:
 > ```sql
