@@ -268,10 +268,10 @@ def call_refresh(request: dict) -> str:
     return json.dumps(reply)
 
 
-def quoted_string(s: str) -> str:
+def escaped_string(s: str) -> str:
     if s is None:
         return ''
-    return f"""'{s.replace("'", "''")}'"""
+    return f"""'{s.replace("'", "''").replace("&", "%26").replace("#", "%23")}'"""
 
 
 def operand_to_sql(operand: dict) -> str:
@@ -282,7 +282,7 @@ def operand_to_sql(operand: dict) -> str:
     if t in ('literal_exactnumeric', 'literal_double', 'literal_bool'):
         return operand["value"]
     if t == 'literal_string':
-        return quoted_string(operand["value"])
+        return escaped_string(operand["value"])
     if t == 'literal_date':
         return operand["value"]
     if t == 'literal_timestamp':
@@ -435,9 +435,9 @@ def call_pushdown(request: dict) -> str:
 
     sql_text: str = f"""
         select "{script_schema}".SF_SELECT(
-            {quoted_string(source_object)}
-            , {quoted_string(connection_name)}
-            , {quoted_string(extra_text)}
+            {escaped_string(source_object)}
+            , {escaped_string(connection_name)}
+            , {escaped_string(extra_text)}
         ) emits( {emit_list} )
         """
         
